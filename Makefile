@@ -4,7 +4,7 @@ default: build/libopus.js
 
 build/libopus.js: libopus
 	mkdir -p build
-	emcc $(CCFLAGS) -s SINGLE_FILE=1 -s WASM=1 -s EXPORTED_FUNCTIONS="['_opus_decoder_create', '_opus_decode_float', '_opus_decoder_destroy']" -Llibopusbuild/lib -lopus -o $@
+	emcc $(CCFLAGS) -s SINGLE_FILE=1 -s WASM=1 -s EXPORTED_FUNCTIONS="['_opus_decoder_create', '_opus_decode_float', '_opus_decoder_destroy', '_malloc', '_realloc', '_free']" -Llibopusbuild/lib -lopus -o $@
 	@# emcc does not always exit with status false on error, so ensure previous line succeeded
 	[ -f build/libopus.js ]
 	echo "module.exports = Module" >> build/libopus.js
